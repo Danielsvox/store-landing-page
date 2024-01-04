@@ -1,0 +1,55 @@
+// ContactForm.module.scss
+$primaryColor: #D8AD3D;
+
+$contentMarginLeft: 366px;
+$contentMarginRight: 347px;
+
+// Base styles for the form
+.contact-form {
+    max-width: 1440px; // Matches the header's width
+    margin-left: $contentMarginLeft; // Adjust based on the design
+    margin-right: $contentMarginRight; // Adjust based on the design
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centers the grid in the container
+
+    &__field {
+        width: 352.38px;
+        height: 50px;
+        border: 1px solid #000; // Adjust as needed
+
+        // State styles
+        &:hover {
+            border-color: $primaryColor; // Adjust as needed
+        }
+
+        &--focused {
+            border-color: lighten(#000, 10%); // Adjust as needed
+        }
+    }
+
+    &__button {
+        width: 170px;
+        height: 55px;
+        margin-top: 48.86px; // Space above button
+        background-color: $primaryColor; // Use variable for color
+        border-radius: 50px; // Add other button styles
+    }
+
+    // Responsive adjustments
+    @media only screen and (max-width: 600px) {
+        margin: 0 5%; // Give some space on the sides
+        width: 90%; // Use percentage-based width for responsiveness
+
+        &__field,
+        &__button {
+            width: 100%; // Take full width of the container
+            margin-bottom: 20px; // Adds some space between fields
+        }
+
+        &__button {
+            margin-top: 20px; // Consistent with field margins
+        }
+    }
+
+}

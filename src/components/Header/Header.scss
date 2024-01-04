@@ -1,0 +1,56 @@
+// src/components/Header/Header.scss
+
+// Color palette from the style guide
+$color-text-primary: #24272A;
+$color-text-secondary: #3F454A;
+$color-primary: #D8AD3D;
+$color-secondary: #009CD9;
+$color-tertiary: #B72C2C;
+$color-white: #FFFFFF;
+
+// Typography from the style guide
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.header {
+    width: 100%; // Responsive width
+    height: 741px; // Height as per Figma design
+    flex-shrink: 0; // Prevent the header from shrinking
+    background-image: url('../../assets/header-background.png'); // Adjust the path as necessary
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: 'Caveat', cursive; // Primary typography for the header
+    color: $color-white;
+
+    @media (min-width: 100%) {
+        width: 100%; // Fixed width on large screens
+    }
+
+    &__title {
+        font-family: 'Caveat', cursive; // Specified font family
+        font-size: 8vw; // Responsive font size based on viewport width
+        font-weight: 700; // Bold font weight
+        line-height: 1; // Use a unitless value for line-height to scale with the font size
+        letter-spacing: 0em; // Specified letter spacing
+        text-align: left; // Text aligned to the left
+        position: absolute; // Position absolutely within the header
+        top: 15vw; // Use viewport width to keep the ratio consistent
+        left: 9vw; // Use viewport width to keep the ratio consistent
+        width: 44vw; // Use viewport width to keep the ratio consistent
+        height: auto; // Let the height be determined by the content and line-height
+        display: flex;
+        align-items: center; // Align text vertically in the center
+        justify-content: left; // Align text horizontally to the left
+        color: $color-text-primary;
+
+        // Use a media query to cap the font size for very large screens
+        @media (min-width: 100%) {
+            font-size: 120px; // Fixed font size for large screens
+            top: 212px; // Fixed position for large screens
+            left: 132px; // Fixed position for large screens
+            width: 635px; // Fixed width for large screens
+        }
+    }
+
+}

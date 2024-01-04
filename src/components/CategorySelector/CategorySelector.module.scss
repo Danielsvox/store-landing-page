@@ -1,0 +1,29 @@
+// CategorySelector.module.scss
+
+.navBar {
+    width: 274px;
+    height: 217px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
+    z-index: 1; // Ensure it's above other content
+    // Default styles for sm size and up
+    position: absolute;
+    top: 691px;
+    left: 137px;
+
+    // Breakpoints for responsiveness, adjust the values according to your theme's breakpoints
+    @media only screen and (max-width: 600px) {
+        top: initial;
+        bottom: 0; // Sticks to bottom on xs screens
+        left: 0; // Sticks to left on xs screens
+        right: 0; // Sticks to right on xs screens
+        margin: auto; // Centers the box
+        margin-top: 16px; // Adds top margin on xs screens
+        margin-bottom: 16px; // Adds bottom margin on xs screens
+        display: flex;
+        flex-direction: column; // Stacks children vertically on xs screens
+    }
+
+    // For larger screens, if you need specific styles, you can add more media queries here
+}

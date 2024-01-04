@@ -1,0 +1,29 @@
+// ContentDisplay.module.scss
+
+$contentMarginLeft: 441px;
+$contentMarginRight: 129px;
+$headerHeight: 50px; // Replace with the actual header height if it's different
+
+.contentDisplay {
+    max-width: 1440px; // Matches the header's width
+    margin-left: $contentMarginLeft; // Adjust based on the design
+    margin-right: $contentMarginRight; // Adjust based on the design
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centers the grid in the container
+    margin-top: -$headerHeight; // Pushes content down by the header's height
+
+    // ContentDisplay.module.scss
+
+    @media only screen and (max-width: 600px) {
+        top: initial;
+        bottom: 0; // Aligns content to the bottom on xs screens
+        left: 0; // Resets left position to ensure content fits the screen
+        right: 0; // Resets right position as well
+        margin: 16px auto; // Centers the box horizontally and adds vertical margins
+        display: flex;
+        flex-direction: column; // Stacks children vertically on xs screens
+        padding-left: 17%;
+    }
+
+}
