@@ -1,5 +1,7 @@
 // ContactForm.module.scss
 $primaryColor: #D8AD3D;
+$borderColor: #C4C4C4; // Assuming a light gray border for the fields
+$errorColor: #ff6b6b; // Color for error messages
 
 $contentMarginLeft: 366px;
 $contentMarginRight: 347px;
@@ -7,49 +9,61 @@ $contentMarginRight: 347px;
 // Base styles for the form
 .contact-form {
     max-width: 1440px; // Matches the header's width
-    margin-left: $contentMarginLeft; // Adjust based on the design
-    margin-right: $contentMarginRight; // Adjust based on the design
+    margin: 0 347px 0 366px; // Center the form within the parent container
+    padding: 20px; // Add padding on the sides if necessary
     display: flex;
-    flex-direction: column;
-    align-items: center; // Centers the grid in the container
+    flex-wrap: wrap; // Allow the form rows to wrap onto the next line
+    gap: 20px; // Space between form fields
+
+    &__row {
+        flex-basis: calc(50% - 10px); // Half of the parent's width minus half of the gap
+        max-width: calc(50% - 10px); // Prevent the row from growing beyond the calculated width
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 48.86px; // Space between rows
+
+        // Adjustments for when fields need to stack vertically on smaller screens
+        @media only screen and (max-width: 600px) {
+            flex-basis: 100%; // Full width on smaller screens
+            max-width: 100%; // Ensure the row takes the full width available
+            margin-bottom: 20px; // Reduce space between stacked rows
+        }
+    }
 
     &__field {
-        width: 352.38px;
+        width: 350.84px; // Each field takes full width of its flex container
         height: 50px;
-        border: 1px solid #000; // Adjust as needed
+        border: 1px solid $borderColor;
+        padding: 0 15px; // Padding inside the text fields
+        margin-right: 19.16px;
 
-        // State styles
-        &:hover {
-            border-color: $primaryColor; // Adjust as needed
+        &:hover,
+        &:focus {
+            border-color: darken($borderColor, 10%); // Darken the border color on hover/focus
         }
 
-        &--focused {
-            border-color: lighten(#000, 10%); // Adjust as needed
-        }
+        // No need for media query here, as the width is always 100% of the flex container
     }
 
     &__button {
-        width: 170px;
-        height: 55px;
-        margin-top: 48.86px; // Space above button
-        background-color: $primaryColor; // Use variable for color
-        border-radius: 50px; // Add other button styles
-    }
+        width: calc(100% - 40px); // Subtract the horizontal paddings
+        height: 50px;
+        margin-top: 48.86px; // Space above the button
+        background-color: $primaryColor;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 50px; // Ensures the button has rounded corners
 
-    // Responsive adjustments
-    @media only screen and (max-width: 600px) {
-        margin: 0 5%; // Give some space on the sides
-        width: 90%; // Use percentage-based width for responsiveness
-
-        &__field,
-        &__button {
-            width: 100%; // Take full width of the container
-            margin-bottom: 20px; // Adds some space between fields
-        }
-
-        &__button {
-            margin-top: 20px; // Consistent with field margins
+        &:hover {
+            background-color: darken($primaryColor, 10%); // Darken the button background on hover
         }
     }
 
+    &__error {
+        color: $errorColor;
+        font-size: 0.85em; // Smaller font size for error message
+        margin-top: -10px; // Bring error message closer to the field
+        margin-bottom: 10px; // Space after error message
+    }
 }

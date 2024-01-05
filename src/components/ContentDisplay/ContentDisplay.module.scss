@@ -9,8 +9,10 @@ $headerHeight: 50px; // Replace with the actual header height if it's different
     margin-left: $contentMarginLeft; // Adjust based on the design
     margin-right: $contentMarginRight; // Adjust based on the design
     display: flex;
-    flex-direction: column;
-    align-items: center; // Centers the grid in the container
+    flex-wrap: wrap;
+    gap: 30px; // This sets the space between the cards
+    row-gap: 36px;
+    justify-content: center;
     margin-top: -$headerHeight; // Pushes content down by the header's height
 
     // ContentDisplay.module.scss

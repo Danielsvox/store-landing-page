@@ -16,12 +16,14 @@ $color-white: #FFFFFF;
     width: 100%; // Responsive width
     height: 741px; // Height as per Figma design
     flex-shrink: 0; // Prevent the header from shrinking
-    background-image: url('../../assets/header-background.png'); // Adjust the path as necessary
+    background-image: url('../../assets/header-background.png'), linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    background-blend-mode: overlay;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     font-family: 'Caveat', cursive; // Primary typography for the header
     color: $color-white;
+
 
     @media (min-width: 100%) {
         width: 100%; // Fixed width on large screens
@@ -29,7 +31,7 @@ $color-white: #FFFFFF;
 
     &__title {
         font-family: 'Caveat', cursive; // Specified font family
-        font-size: 8vw; // Responsive font size based on viewport width
+        font-size: 120px; // Responsive font size based on viewport width
         font-weight: 700; // Bold font weight
         line-height: 1; // Use a unitless value for line-height to scale with the font size
         letter-spacing: 0em; // Specified letter spacing

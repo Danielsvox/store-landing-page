@@ -1,50 +1,35 @@
-// CategorySelector.jsx
-
 import React from 'react';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Typography from '@mui/material/Typography';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Box from '@mui/material/Box';
 import styles from './CategorySelector.module.scss';
+import ArrowForwardIconSvg from '../../assets/ArrowForwardIconSvg.svg'; // Import your SVG or other icon solution
 
 const CategorySelector = ({ activeCategory, setActiveCategory }) => {
     const categories = ['TODOS', 'PRODUCTOS', 'RECETAS', 'CONSEJOS'];
 
     const handleCategoryChange = (category) => {
         setActiveCategory(category);
-        // The actual fetching is handled by the MainComponent's useEffect
     };
 
     return (
-        <Box className={styles.navBar}>
-            <List component="nav" aria-label="mailbox folders">
+        <div className={styles.navBar}>
+            <ul className={styles.navList}>
                 {categories.map((category) => (
-                    <ListItemButton
+                    <li
                         key={category}
-                        selected={activeCategory === category}
+                        className={`${styles.navItem} ${activeCategory === category ? styles.navItemSelected : ''}`}
                         onClick={() => handleCategoryChange(category)}
                     >
-                        <ListItemText primary={
-                            <Typography
-                                variant="caption"
-                                color={activeCategory === category ? 'primary' : 'secondaryColor'}
-                                sx={{ fontWeight: activeCategory === category ? 700 : 400 }}
-                            >
-                                {category}
-                            </Typography>
-                        } />
+                        <span className={styles.navText}>
+                            {category}
+                        </span>
                         {activeCategory === category && (
-                            <ListItemIcon>
-                                <ArrowForwardIcon color='primary' />
-                            </ListItemIcon>
+                            <span className={styles.navIcon}>
+                                <img src={ArrowForwardIconSvg} alt="Arrow Icon" /> {/* Use SVG as an image source */}
+                            </span>
                         )}
-                    </ListItemButton>
+                    </li>
                 ))}
-            </List>
-        </Box >
+            </ul>
+        </div>
     );
 };
 

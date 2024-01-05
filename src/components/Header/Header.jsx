@@ -3,6 +3,7 @@ import React from 'react';
 import './Header.scss';
 import backgroundImage from '../../assets/header-background.png';
 
+
 const Header = () => {
     return (
         <header className="header" style={{ backgroundImage: `url(${backgroundImage})` }}>

@@ -12,6 +12,7 @@
     top: 691px;
     left: 137px;
 
+
     // Breakpoints for responsiveness, adjust the values according to your theme's breakpoints
     @media only screen and (max-width: 600px) {
         top: initial;
@@ -26,4 +27,36 @@
     }
 
     // For larger screens, if you need specific styles, you can add more media queries here
+}
+
+.navList {
+    list-style: none;
+    margin: 0;
+    padding-top: 24px;
+    padding-left: 23px;
+    padding-right: 53px;
+    padding-bottom: 16px;
+}
+
+.navItem {
+    padding: 10px; // Adjust as needed
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navItemSelected {
+    // Add selected item styles here
+    color: #D8AD3D; // Example
+    font-weight: bold; // This will make the text bold
+}
+
+.navText {
+    font-family: "Open Sans";
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0.03em;
+    text-align: left;
 }

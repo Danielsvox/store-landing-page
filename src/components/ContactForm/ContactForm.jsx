@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button, Grid, Alert } from '@mui/material';
 import styles from './ContactForm.module.scss'; // Import SCSS module
 import { sendContactForm } from '../../api'; // Import the API function
 
@@ -12,15 +11,32 @@ const ContactForm = () => {
         phone: '',
     });
 
+    // State to store validation errors
+    const [errors, setErrors] = useState({});
+
     // State to store the API response message
     const [responseMessage, setResponseMessage] = useState(null);
 
+    // Function to validate form
+    const validateForm = () => {
+        let tempErrors = {};
+        if (!formValues.name) tempErrors.name = "Name is required.";
+        if (!formValues.surname) tempErrors.surname = "Surname is required.";
+        if (!formValues.email) tempErrors.email = "Email is required.";
+        if (!formValues.phone) tempErrors.phone = "Phone is required.";
+        // Add more validation rules here
+        setErrors(tempErrors);
+        return Object.keys(tempErrors).length === 0;
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!validateForm()) return; // Stop submission if validation fails
+
         try {
             const response = await sendContactForm(formValues);
             setResponseMessage({ type: 'success', text: 'Form submitted successfully!' });
-            // Clear form values if needed
+            // Clear form values
             setFormValues({
                 name: '',
                 surname: '',
@@ -29,12 +45,6 @@ const ContactForm = () => {
             });
         } catch (error) {
             setResponseMessage({ type: 'error', text: `Error: ${error.message}` });
-            setFormValues({
-                name: '',
-                surname: '',
-                email: '',
-                phone: '',
-            });
         }
     };
 
@@ -48,74 +58,76 @@ const ContactForm = () => {
     };
 
     return (
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 8 }} className={styles['contact-form']}>
+        <form className={styles['contact-form']} onSubmit={handleSubmit}>
             {/* Display alert message if responseMessage is set */}
             {responseMessage && (
-                <Alert severity={responseMessage.type} sx={{ mb: 2 }}>
+                <div className={`${styles['contact-form__alert']} ${styles[responseMessage.type]}`}>
                     {responseMessage.text}
-                </Alert>
+                </div>
             )}
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        fullWidth
-                        id="nombre"
-                        label="Nombre"
-                        name="nombre"
-                        value={formValues.nombre}
-                        onChange={handleInputChange}
-                        className={styles['contact-form__field']} // Apply class from SCSS module
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        fullWidth
-                        id="apellido"
-                        label="Apellido"
-                        name="apellido"
-                        value={formValues.apellido}
-                        onChange={handleInputChange}
-                        className={styles['contact-form__field']} // Apply class from SCSS module
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email"
-                        name="email"
-                        value={formValues.email}
-                        onChange={handleInputChange}
-                        className={styles['contact-form__field']} // Apply class from SCSS module
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        fullWidth
-                        id="telefono"
-                        label="Teléfono"
-                        name="telefono"
-                        value={formValues.telefono}
-                        onChange={handleInputChange}
-                        className={styles['contact-form__field']} // Apply class from SCSS module
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        className={styles['contact-form__button']} // Apply class from SCSS module
-                    >
-                        Enviar
-                    </Button>
-                </Grid>
-            </Grid>
-        </Box>
+            <div className={styles['contact-form__row']}>
+                <input
+                    type="text"
+                    id="name    "
+                    name="name"
+                    placeholder="Nombre"
+                    value={formValues.name}
+                    onChange={handleInputChange}
+                    className={styles['contact-form__field']}
+                    required
+                />
+                {errors.name && <div className={styles['contact-form__error']}>{errors.name}</div>}
+            </div>
+            <div className={styles['contact-form__row']}>
+                <input
+                    type="text"
+                    id="surname"
+                    name="surname"
+                    placeholder="Apellido"
+                    value={formValues.surname}
+                    onChange={handleInputChange}
+                    className={styles['contact-form__field']}
+                    required
+                />
+                {errors.surname && <div className={styles['contact-form__error']}>{errors.surname}</div>}
+            </div>
+            <div className={styles['contact-form__row']}>
+                <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    value={formValues.email}
+                    onChange={handleInputChange}
+                    className={styles['contact-form__field']}
+                    required
+                />
+                {errors.email && <div className={styles['contact-form__error']}>{errors.email}</div>}
+            </div>
+            <div className={styles['contact-form__row']}>
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    placeholder="Teléfono"
+                    value={formValues.phone}
+                    onChange={handleInputChange}
+                    className={styles['contact-form__field']}
+                    required
+                />
+                {errors.phone && <div className={styles['contact-form__error']}>{errors.phone}</div>}
+            </div>
+            <div className={styles['contact-form__row']}>
+                <button
+                    type="submit"
+                    className={styles['contact-form__button']}
+                >
+                    Enviar
+                </button>
+            </div>
+        </form>
     );
 };
 
 export default ContactForm;
+
